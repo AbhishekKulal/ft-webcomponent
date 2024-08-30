@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from 'antd';
+import './styles.scss';
 
 const VIDEOS_LINKS =  {
     'add_indent' : {
@@ -15,7 +16,7 @@ const VIDEOS_LINKS =  {
 
 function VideoModal(props){
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const {videoSource} = props
+    const {videoSource, label} = props
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -32,8 +33,8 @@ function VideoModal(props){
   if(!VIDEOS_LINKS[videoSource]) return <h1>Unable to find the video!</h1>
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open {VIDEOS_LINKS[videoSource].name}
+      <Button type="link" onClick={showModal} className="btn-link">
+        {label || VIDEOS_LINKS[videoSource].name}
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <div style={{padding:'75% 0 0 0', position:'relative'}}>

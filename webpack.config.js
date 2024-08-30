@@ -53,6 +53,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -71,15 +72,17 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            // "plugins": [
-            //     ["import", { "libraryName": "antd", "style": "css" }]
-            //   ]
+            "plugins": [
+                ["import", { libraryName: "antd", style: true }],
+            ],
           },
         },
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+            MiniCssExtractPlugin.loader,
+            'style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -87,6 +90,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
   ],
   devServer: {
     static: path.resolve(__dirname, 'dist'),
