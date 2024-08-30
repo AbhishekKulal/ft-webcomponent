@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import 'antd/dist/antd.css';
-import { Button } from 'antd';
 import VideoModal from './VideoModal';
 
 const VideoComponent = ({ videoSource, label }) => (
